@@ -1,10 +1,16 @@
 import "./App.css";
+import React from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import RangeSlider from "./components/rangeSliders";
 import OptionSlider from "./components/optionSlider";
-import Stack from '@mui/material/Stack';
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import BarChart from "./components/barChart";
+import RadarChartWrap from "./components/radarChart";
+import { dummyBarChartData, dummyLabels } from "./dummydata";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#1A2027",
@@ -31,18 +37,35 @@ function App() {
               <Item>Stack Area Plot</Item>
             </Grid>
             <Grid item xs={6}>
-              <Item>Radar Plot</Item>
+              <Item>
+              <RadarChartWrap/>
+              </Item>
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={1}>
-        <Stack sx={{ height: 600 }} spacing={3} direction="column" style={{padding: "40%"}}>
-          <OptionSlider/>
-          <RangeSlider/>
+          <Stack
+            sx={{ height: 600 }}
+            spacing={3}
+            direction="column"
+            style={{ padding: "20%" }}
+          >
+            <Button variant="outlined" startIcon={<RestartAltIcon />}>
+              RST
+            </Button>
+            <OptionSlider />
+            <RangeSlider />
           </Stack>
         </Grid>
         <Grid item xs={3}>
-          <Item style={{height: "100vh"}}>Barchart</Item>
+          <Item style={{ height: "100vh" }}>
+            <BarChart
+              width={400}
+              height={800}
+              data={dummyBarChartData}
+              labels={dummyLabels}
+            />
+          </Item>
         </Grid>
       </Grid>
     </div>
