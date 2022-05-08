@@ -21,17 +21,17 @@ function RadarChartWrap({ data}){
               // data
               {
                 data: {
-                    population: 1,
-                    miltaryExpenditure: 0.9,
-                    GDP: 0.89
+                    population: 0.8,
+                    miltaryExpenditure: 0.6,
+                    GDP: 0.8
                 },
                 meta: { color: 'blue' }
               },
               {
                 data: {
-                    population: 0.5,
-                    miltaryExpenditure: 0.6,
-                    GDP: 0.7
+                    population: 0.6,
+                    miltaryExpenditure: 0.8,
+                    GDP: 1
                 },
                 meta: { color: 'red' }
               }

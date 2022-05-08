@@ -10,7 +10,12 @@ import Button from "@mui/material/Button";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import BarChart from "./components/barChart";
 import RadarChartWrap from "./components/radarChart";
-import { dummyBarChartData, dummyLabels } from "./dummydata";
+import {
+  dummyBarChartData,
+  dummyLabels,
+  dummyStackedAreaData,
+} from "./dummydata";
+import StackedAreaChart from "./components/stackAreaChart";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#1A2027",
@@ -26,19 +31,26 @@ function App() {
     <div className="App">
       <Grid container spacing={0}>
         <Grid item xs={8}>
-          <Grid container spacing={2} style={{ height: "102vh" }}>
+          <Grid container spacing={1} style={{ height: "102vh" }}>
             <Grid item xs={6}>
               <Item>World Map</Item>
             </Grid>
             <Grid item xs={6}>
-              <Item>Multiline Plot</Item>
-            </Grid>
-            <Grid item xs={6}>
-              <Item>Stack Area Plot</Item>
+              <Item>PCP</Item>
             </Grid>
             <Grid item xs={6}>
               <Item>
-              <RadarChartWrap/>
+                <StackedAreaChart
+                  width={400}
+                  height={400}
+                  data={dummyStackedAreaData}
+                  range={[2000, 2003]}
+                />
+              </Item>
+            </Grid>
+            <Grid item xs={6}>
+              <Item>
+                <RadarChartWrap />
               </Item>
             </Grid>
           </Grid>

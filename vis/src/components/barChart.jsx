@@ -17,7 +17,7 @@ function BarChart({ width, height, data, labels }){
     }, [data]);
 
     const draw = () => {
-        let margin = {top: 0, right: 90, bottom: 90, left: 40};
+        let margin = {top: 0, right: 90, bottom: 90, left: 50};
         let svgWidth = 400, svgHeight = 680;
         let height = svgHeight- margin.top- margin.bottom, width = svgWidth - margin.left - margin.right;
         let sourceNames = [], sourceCount = [];
@@ -86,7 +86,7 @@ function BarChart({ width, height, data, labels }){
             
         bars.append("text")
             .text(function(d) { 
-                return data[d];
+                return `${parseInt(data[d]/1000000000)}B`;
             })
             .attr("x", function(d){
                 return x(data[d]) + 20;
