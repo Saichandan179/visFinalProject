@@ -50,7 +50,7 @@ function App() {
             </Grid>
             <Grid item xs={6}>
               <Item>
-                <RadarChartWrap />
+                <RadarChartWrap width={400} height={400} />
               </Item>
             </Grid>
           </Grid>

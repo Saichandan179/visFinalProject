@@ -53,7 +53,7 @@ function StackedAreaChart({ width, height, data, range, labels }) {
 
     var color = d3.scaleOrdinal()
     .domain(["India", "China", "USA"])
-    .range(['377eb8','#e41a1c','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999'])
+    .range(["#5adfe8", "#64a5f5", "#6df7e3"])
 
     // var color = ['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf'];
 
@@ -72,7 +72,7 @@ function StackedAreaChart({ width, height, data, range, labels }) {
   };
 
   return (
-    <div className="Chart" style={{ marginRight: "70px" }}>
+    <div className="Chart" >
       <svg ref={ref}></svg>
     </div>
   );

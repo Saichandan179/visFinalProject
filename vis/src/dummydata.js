@@ -25,7 +25,7 @@ export const dummyStackedAreaData = [
             country: "India",
             year: 2000,
             value0: 0,
-            value1: 123
+            value1: 0
 
         },
         {
@@ -51,8 +51,8 @@ export const dummyStackedAreaData = [
         {
             country: "USA",
             year: 2000,
-            value0: 123,
-            value1: 193
+            value0: 0,
+            value1: 0
         },
         {
             country: "USA",
@@ -77,14 +77,14 @@ export const dummyStackedAreaData = [
         {
             country: "China",
             year: 2000,
-            value0: 193,
-            value1: 273
+            value0: 0,
+            value1: 0
         },
         {
             country: "China",
             year: 2001,
             value0: 134,
-            value1: 150
+            value1: 194
         },
         {
             country: "China",
