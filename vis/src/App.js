@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import BarChart from "./components/barChart";
 import RadarChartWrap from "./components/radarChart";
+import WorldMap from './components/worldMap';
 import {
   dummyBarChartData,
   dummyLabels,
@@ -33,7 +34,14 @@ function App() {
         <Grid item xs={8}>
           <Grid container spacing={1} style={{ height: "102vh" }}>
             <Grid item xs={6}>
-              <Item>World Map</Item>
+              <Item>
+                <WorldMap
+                    width={400}
+                    height={400}
+                    data={dummyStackedAreaData}
+                    range={[2000, 2003]}
+                  />
+              </Item>
             </Grid>
             <Grid item xs={6}>
               <Item>PCP</Item>
