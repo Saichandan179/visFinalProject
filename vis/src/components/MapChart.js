@@ -19,7 +19,7 @@ const rounded = num => {
   }
 };
 
-const MapChart = ({ setTooltipContent }) => {
+const MapChart = ({ selectCountry, setTooltipContent }) => {
   return (
     <>
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
@@ -32,9 +32,12 @@ const MapChart = ({ setTooltipContent }) => {
                   geography={geo}
                   onMouseEnter={() => {
                     const { NAME, POP_EST } = geo.properties;
-                    setTooltipContent(`${NAME} — ${rounded(POP_EST)}`);
+                    setTooltipContent(`${NAME}`);
+                    // setTooltipContent(`${NAME} — ${rounded(POP_EST)}`);
                   }}
                   onClick={() => {
+                    const { NAME, POP_EST } = geo.properties;
+                    selectCountry(NAME);
                     // TODO 
                     // Add this name to a list / delete from list if it already exists
                   }}

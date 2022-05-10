@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -28,6 +28,9 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function App() {
+
+  const [countries, setCountries] = useState([]);
+
   return (
     <div className="App">
       <Grid container spacing={0}>
@@ -36,10 +39,17 @@ function App() {
             <Grid item xs={6}>
               <Item>
                 <WorldMap
-                    width={400}
-                    height={400}
-                    data={dummyStackedAreaData}
-                    range={[2000, 2003]}
+                  selectCountry={(country) => {
+                    // console.log("Selected country: "+country);
+                    // console.log("prev state: "+countries)
+                    const index = countries.findIndex(name => name === country); //use id instead of index
+                    if (index > -1) {
+                      setCountries(countries.filter(nm => nm !== country));
+                    } else {
+                      setCountries(prevState => [...prevState, country]);
+                    }
+                    // console.log(countries);
+                  }}
                   />
               </Item>
             </Grid>
@@ -53,6 +63,7 @@ function App() {
                   height={400}
                   data={dummyStackedAreaData}
                   range={[2000, 2003]}
+                  countries={countries}
                 />
               </Item>
             </Grid>
