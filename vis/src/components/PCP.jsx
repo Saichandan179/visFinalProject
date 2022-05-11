@@ -49,16 +49,16 @@ export function PCP({data}) {
               dimensionz.push(tempObj);
             }
           });
-          setDimensions(dimensionz);
-          tempDims = dimensionz;
+          
     }
-    
+    setDimensions(dimensionz);
+          tempDims = dimensionz;
   };
 
   var x;
 
   useEffect(() => {
-    if (data.length > 0) {
+    if (data) {
       let parsedResponse = data;
       let tempState = parsedResponse;
       // var no_of_dimensions = Object.keys(parsedResponse[0]).length - 1;
