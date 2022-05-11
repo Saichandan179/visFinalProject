@@ -45,15 +45,13 @@ function StackedAreaChart({ width, height, data, range, countries }) {
     var y = d3
       .scaleLinear()
       .domain([
-        0,
-        300
+        1000000000,
+        2500000000
       ])
       .range([height, 0]);
     svg.append("g").call(d3.axisLeft(y));
 
-    var color = d3.scaleOrdinal()
-    .domain(["India", "China", "USA"])
-    .range(["#5adfe8", "#64a5f5", "#6df7e3"])
+    const color = ["#5adfe8", "#64a5f5", "#6df7e3"]
 
     // var color = ['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf'];
 
@@ -62,7 +60,7 @@ function StackedAreaChart({ width, height, data, range, countries }) {
     .data(data)
     .enter()
     .append("path")
-      .style("fill", function(d, i) { return color(d[0].country) })
+      .style("fill", function(d, i) { return color[i] })
       .attr("d", d3.area()
         .x(function(d, i) { return x(d.year); })
         .y0(function(d) { return y(d.value0); })

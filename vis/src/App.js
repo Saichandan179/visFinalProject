@@ -14,10 +14,11 @@ import WorldMap from './components/worldMap';
 import {
   dummyBarChartData,
   dummyLabels,
-  dummyStackedAreaData,
+  pcptempdata
 } from "./dummydata";
 import StackedAreaChart from "./components/stackAreaChart";
-import {getStackedAreaData} from './functionutils';
+import {getStackedAreaData, getPCPdata} from './functionutils';
+import { PCP } from './components/PCP';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#1A2027",
@@ -30,8 +31,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function App() {
   useEffect(() => {
-    getStackedAreaData(["India", "China", "Japan"], [2000, 2001, 2002, 2003, 2004, 2005, 2006], "population");
-  }, []);
+    console.log(countries);
+  }, [countries]);
 
   const [countries, setCountries] = useState([]);
 
@@ -58,15 +59,15 @@ function App() {
               </Item>
             </Grid>
             <Grid item xs={6}>
-              <Item>PCP</Item>
+              <Item><PCP data={getPCPdata(countries, [2000, 2006])}/></Item>
             </Grid>
             <Grid item xs={6}>
               <Item>
                 <StackedAreaChart
                   width={400}
                   height={400}
-                  data={dummyStackedAreaData}
-                  range={[2000, 2003]}
+                  data={getStackedAreaData(countries, [2000, 2006], "population")}
+                  range={[2000, 2006]}
                   countries={countries}
                 />
               </Item>

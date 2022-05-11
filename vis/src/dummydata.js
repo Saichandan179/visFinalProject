@@ -100,6 +100,57 @@ export const dummyStackedAreaData = [
   ],
 ];
 
+export const pcptempdata = [
+   {
+      year:"2000",
+      country: "India",
+      population: 123456,
+      gdp: 454545,
+      color: 0,
+      "military Expenditure": 45546
+   },
+   {
+      year:"2001",
+      country: "India",
+      population: 5656,
+      gdp: 4545,
+      color: 0,
+      "military Expenditure": 452
+   },
+   {
+      year:"2002",
+      country: "India",
+      population: 45667,
+      gdp: 2423,
+      color: 0,
+      "military Expenditure": 45452
+   },
+   {
+      year:"2000",
+      country: "China",
+      population: 8989,
+      gdp: 334,
+      color: 1,
+      "military Expenditure": 9088
+   },
+   {
+      year:"2001",
+      country: "China",
+      population: 9987,
+      gdp: 1231,
+      color: 1,
+      "military Expenditure": 343
+   },
+   {
+      year:"2002",
+      country: "China",
+      population: 12312,
+      gdp: 1231,
+      color: 1,
+      "military Expenditure": 12131
+   }
+]
+
 //final data
 export const militaryExpData = {
     "2000": {
