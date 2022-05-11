@@ -2,7 +2,7 @@ import * as d3 from "d3";
 import React, { useRef, useEffect } from "react";
 // import {dummyStackedAreaData} from "../dummydata";
 
-function StackedAreaChart({ width, height, data, range, labels }) {
+function StackedAreaChart({ width, height, data, range, countries }) {
   const ref = useRef();
 
   useEffect(() => {

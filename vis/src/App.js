@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import BarChart from "./components/barChart";
 import RadarChartWrap from "./components/radarChart";
+import WorldMap from './components/worldMap';
 import {
   dummyBarChartData,
   dummyLabels,
@@ -32,13 +33,29 @@ function App() {
     getStackedAreaData(["India", "China", "Japan"], [2000, 2001, 2002, 2003, 2004, 2005, 2006], "population");
   }, []);
 
+  const [countries, setCountries] = useState([]);
+
   return (
     <div className="App">
       <Grid container spacing={0}>
         <Grid item xs={8}>
           <Grid container spacing={1} style={{ height: "102vh" }}>
             <Grid item xs={6}>
-              <Item>World Map</Item>
+              <Item>
+                <WorldMap
+                  selectCountry={(country) => {
+                    // console.log("Selected country: "+country);
+                    // console.log("prev state: "+countries)
+                    const index = countries.findIndex(name => name === country); //use id instead of index
+                    if (index > -1) {
+                      setCountries(countries.filter(nm => nm !== country));
+                    } else {
+                      setCountries(prevState => [...prevState, country]);
+                    }
+                    // console.log(countries);
+                  }}
+                  />
+              </Item>
             </Grid>
             <Grid item xs={6}>
               <Item>PCP</Item>
@@ -50,6 +67,7 @@ function App() {
                   height={400}
                   data={dummyStackedAreaData}
                   range={[2000, 2003]}
+                  countries={countries}
                 />
               </Item>
             </Grid>
