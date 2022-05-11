@@ -80,22 +80,22 @@ function RadarChart(id, data, options) {
 		.append("circle")
 		.attr("class", "gridCircle")
 		.attr("r", function(d, i){return radius/cfg.levels*d;})
-		.style("fill", "#CDCDCD")
-		.style("stroke", "#CDCDCD")
+		.style("fill", "#72a8f7")
+		.style("stroke", "#72a8f7")
 		.style("fill-opacity", cfg.opacityCircles)
 		.style("filter" , "url(#glow)");
 
 	//Text indicating at what % each level is
-	axisGrid.selectAll(".axisLabel")
-	   .data(d3.range(1,(cfg.levels+1)).reverse())
-	   .enter().append("text")
-	   .attr("class", "axisLabel")
-	   .attr("x", 4)
-	   .attr("y", function(d){return -d*radius/cfg.levels;})
-	   .attr("dy", "0.4em")
-	   .style("font-size", "10px")
-	   .attr("fill", "#737373")
-	   .text(function(d,i) { return Format(maxValue * d/cfg.levels); });
+	// axisGrid.selectAll(".axisLabel")
+	//    .data(d3.range(1,(cfg.levels+1)).reverse())
+	//    .enter().append("text")
+	//    .attr("class", "axisLabel")
+	//    .attr("x", 4)
+	//    .attr("y", function(d){return -d*radius/cfg.levels;})
+	//    .attr("dy", "0.4em")
+	//    .style("font-size", "10px")
+	//    .attr("fill", "#737373")
+	//    .text(function(d,i) { return Format(maxValue * d/cfg.levels); });
 
 	/////////////////////////////////////////////////////////
 	//////////////////// Draw the axes //////////////////////
@@ -114,8 +114,8 @@ function RadarChart(id, data, options) {
 		.attr("x2", function(d, i){ return rScale(maxValue*1.1) * Math.cos(angleSlice*i - Math.PI/2); })
 		.attr("y2", function(d, i){ return rScale(maxValue*1.1) * Math.sin(angleSlice*i - Math.PI/2); })
 		.attr("class", "line")
-		.style("stroke", "white")
-		.style("stroke-width", "2px");
+		.style("stroke", "#72a8f7")
+		.style("stroke-width", "1px");
 
 	//Append the labels at each axis
 	axis.append("text")
