@@ -150,6 +150,21 @@ function RadarChart(id, data, options) {
 		.data(data)
 		.enter().append("g")
 		.attr("class", "radarWrapper");
+
+	// var tooltip = g.append("text")
+	// 	.attr("class", "tooltip")
+	// 	.style("opacity", 1);
+	var tooltip = d3.select("#radChart")
+		.append("div")
+		.style("opacity", 0)
+		.attr("class", "tooltip")
+		.style("position", "absolute")
+		.style("background-color", "black")
+		.style("border", "solid")
+		.style("border-width", "0px")
+		.style("border-radius", "5px")
+		.style("padding", "10px")
+		.style("visibility", "visible");
 			
 	//Append the backgrounds	
 	blobWrapper
@@ -164,8 +179,19 @@ function RadarChart(id, data, options) {
 				.transition().duration(200)
 				.style("fill-opacity", 0.1); 
 			//Bring back the hovered over blob
+			var newX =  parseFloat(d3.select(this).attr('cx')) - 10;
+			var newY =  parseFloat(d3.select(this).attr('cy')) - 10;
+			console.log("mouse over called");
+			console.log(d3.event.pageX+" "+d3.event.pageY);
+			console.log(d);
+			tooltip
+				.html(d[0].country)
+				.style("left", (d3.event.pageX+10) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+				.style("top", (d3.event.pageY-10) + "px")
+				.transition().duration(1)
+				.style('opacity', 1);
 			d3.select(this)
-				.transition().duration(200)
+				.transition().duration(1)
 				.style("fill-opacity", 0.7);	
 		})
 		.on('mouseout', function(){
@@ -173,6 +199,8 @@ function RadarChart(id, data, options) {
 			d3.selectAll(".radarArea")
 				.transition().duration(200)
 				.style("fill-opacity", cfg.opacityArea);
+			tooltip.transition().duration(200)
+				.style("opacity", 0);
 		});
 		
 	//Create the outlines	
@@ -233,9 +261,9 @@ function RadarChart(id, data, options) {
 		});
 		
 	//Set up the small tooltip for when you hover over a circle
-	var tooltip = g.append("text")
-		.attr("class", "tooltip")
-		.style("opacity", 0);
+	// var tooltip = g.append("text")
+	// 	.attr("class", "tooltip")
+	// 	.style("opacity", 1);
 	
 	/////////////////////////////////////////////////////////
 	/////////////////// Helper Function /////////////////////

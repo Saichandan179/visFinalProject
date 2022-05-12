@@ -83,7 +83,7 @@ function RadarChartWrap({ data, width, height }) {
     RadarChart(".radarChart", data, radarChartOptions);
   };
 
-  return <div class="radarChart" style={{padding: 0, margin: 0}}></div>;
+  return <div id="radChart" class="radarChart" style={{padding: 0, margin: 0}}></div>;
 }
 
 export default RadarChartWrap;
