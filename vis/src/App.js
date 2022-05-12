@@ -99,6 +99,7 @@ function App() {
                   data={getStackedAreaData(countries, rangeValue, toLabel(optionValue))}
                   range={rangeValue}
                   countries={countries}
+                  labels={{yLabel: `${toLabel(optionValue)}`, xLabel: 'year'}}
                 />
               </Item>
             </Grid>
@@ -133,7 +134,10 @@ function App() {
               width={400}
               height={800}
               data={getBarChartData(countries, rangeValue, toLabel(optionValue))}
-              labels={dummyLabels}
+              labels={{
+                title: `Country vs ${toLabel(optionValue)}`,
+                xLabel: toLabel(optionValue),
+              }}
             />
           </Item>
         </Grid>

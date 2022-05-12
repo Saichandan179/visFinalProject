@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { colorsData } from "../dummydata";
 
 function RadarChart(id, data, options) {
 	var cfg = {
@@ -155,7 +156,7 @@ function RadarChart(id, data, options) {
 		.append("path")
 		.attr("class", "radarArea")
 		.attr("d", function(d,i) { return radarLine(d); })
-		.style("fill", function(d,i) { return cfg.color[i]; })
+		.style("fill", function(d,i) {  return colorsData[d[0].country]; })
 		.style("fill-opacity", cfg.opacityArea)
 		.on('mouseover', function (d,i){
 			//Dim all blobs
@@ -179,7 +180,7 @@ function RadarChart(id, data, options) {
 		.attr("class", "radarStroke")
 		.attr("d", function(d,i) { return radarLine(d); })
 		.style("stroke-width", cfg.strokeWidth + "px")
-		.style("stroke", function(d,i) { return cfg.color[i]; })
+		.style("stroke", function(d,i) { return colorsData[d[0].country]; })
 		.style("fill", "none")
 		.style("filter" , "url(#glow)");		
 	

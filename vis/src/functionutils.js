@@ -90,7 +90,7 @@ export const marks = [
 export const optionmarks = [
     {
       value: 1,
-      label: "population",
+      label: "Population",
     },
     {
       value: 2,
@@ -228,11 +228,11 @@ export const getBarChartData = (countries, range, plot) => {
 };
 
 export const displayText = (val) => {
-  if (val > 1000000000000) {
+  if (val >= 1000000000000) {
     return `${parseInt(val / 100000000000) / 10}T`;
-  } else if (val > 1000000000) {
+  } else if (val >= 1000000000) {
     return `${parseInt(val / 100000000) / 10}B`;
-  } else if (val > 1000000) {
+  } else if (val >= 1000000) {
     return `${parseInt(val / 100000) / 10}M`;
   } else return `${val}`;
 };
