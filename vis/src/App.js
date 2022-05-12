@@ -3,22 +3,25 @@ import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import RangeSlider from "./components/rangeSliders";
-import OptionSlider from "./components/optionSlider";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import Slider from "@mui/material/Slider";
+// import RangeSlider from "./components/rangeSliders";
+// import OptionSlider from "./components/optionSlider";
 import BarChart from "./components/barChart";
 import RadarChartWrap from "./components/radarChart";
-import WorldMap from './components/worldMap';
-import {
-  dummyBarChartData,
-  dummyLabels,
-  pcptempdata
-} from "./dummydata";
+import WorldMap from "./components/worldMap";
+import { dummyLabels } from "./dummydata";
 import StackedAreaChart from "./components/stackAreaChart";
-import {getStackedAreaData, getPCPdata, getRadarChartData, getBarChartData} from './functionutils';
-import { PCP } from './components/PCP';
+import {
+  getStackedAreaData,
+  getPCPdata,
+  getRadarChartData,
+  getBarChartData,
+  marks,
+  optionmarks,
+  valuetext,
+  toLabel
+} from "./functionutils";
+import { PCP } from "./components/PCP";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#1A2027",
@@ -35,72 +38,101 @@ function App() {
   }, [countries]);
 
   const [countries, setCountries] = useState([]);
+  const [rangeValue, setRangeValue] = React.useState([2000, 2020]);
+  const [optionValue, setoptionValue] = React.useState("gdp");
+
+  const handleOptionChange = (event, newoptionValue) => {
+    setoptionValue(newoptionValue);
+  };
+
+  const handleRangeChange = (event, newValue) => {
+    setRangeValue(newValue);
+  };
 
   return (
     <div className="App">
       <Grid container spacing={0}>
-        <Grid item xs={8}>
+        <Grid item xs={9}>
           <Grid container spacing={1} style={{ height: "102vh" }}>
-            <Grid item xs={6}>
+            <Grid item xs={5}>
               <Item>
                 <WorldMap
                   selectCountry={(country) => {
                     // console.log("Selected country: "+country);
                     // console.log("prev state: "+countries)
-                    const index = countries.findIndex(name => name === country); //use id instead of index
+                    const index = countries.findIndex(
+                      (name) => name === country
+                    ); //use id instead of index
                     if (index > -1) {
-                      setCountries(countries.filter(nm => nm !== country));
+                      setCountries(countries.filter((nm) => nm !== country));
                     } else {
-                      setCountries(prevState => [...prevState, country]);
+                      setCountries((prevState) => [...prevState, country]);
                     }
                     // console.log(countries);
                   }}
-                  />
+                />
               </Item>
             </Grid>
-            <Grid item xs={6}>
-              <Item><PCP data={getPCPdata(countries, [2000, 2006])}/></Item>
+            <Grid item xs={5}>
+              <Item>
+                <PCP data={getPCPdata(countries, rangeValue)} />
+              </Item>
             </Grid>
-            <Grid item xs={6} style={{paddingTop: '0px'}}>
+            <Grid item xs={2} style={{ padding: "60px 0 60px 0" }}>
+            <Slider
+        getAriaLabel={() => "Years range"}
+        value={optionValue}
+        onChange={handleOptionChange}
+        getAriaValueText={valuetext}
+        orientation="vertical"
+        marks={optionmarks}
+        track={false}
+        min={1}
+        max={3}
+      />
+            </Grid>
+            <Grid item xs={5} style={{ paddingTop: "0px" }}>
               <Item>
                 <StackedAreaChart
-                  width={400}
-                  height={400}
-                  data={getStackedAreaData(countries, [2000, 2006], "population")}
-                  range={[2000, 2006]}
+                  width={500}
+                  height={500}
+                  data={getStackedAreaData(countries, rangeValue, toLabel(optionValue))}
+                  range={rangeValue}
                   countries={countries}
                 />
               </Item>
             </Grid>
-            <Grid item xs={6} style={{paddingTop: '0px'}}>
+            <Grid item xs={5} style={{ paddingTop: "0px" }}>
               <Item>
-                {
-                  countries.length > 0 && (<RadarChartWrap data={getRadarChartData(countries, [2000, 2003])} width={400} height={400} />)
-                }
+                {countries.length > 0 && (
+                  <RadarChartWrap
+                    data={getRadarChartData(countries, rangeValue)}
+                    width={400}
+                    height={400}
+                  />
+                )}
               </Item>
             </Grid>
+            <Grid item xs={2} style={{ padding: "60px 0 60px 0" }}>
+              <Slider
+                getAriaLabel={() => "Years range"}
+                value={rangeValue}
+                onChange={handleRangeChange}
+                getAriaValueText={valuetext}
+                orientation="vertical"
+                marks={marks}
+                min={2000}
+                max={2020}
+              />
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid item xs={1}>
-          <Stack
-            sx={{ height: 600 }}
-            spacing={3}
-            direction="column"
-            style={{ padding: "20%" }}
-          >
-            <Button variant="outlined" startIcon={<RestartAltIcon />}>
-              RST
-            </Button>
-            <OptionSlider />
-            <RangeSlider />
-          </Stack>
         </Grid>
         <Grid item xs={3}>
           <Item style={{ height: "100vh" }}>
             <BarChart
               width={400}
               height={800}
-              data={getBarChartData(countries, [2000, 2008], "population")}
+              data={getBarChartData(countries, rangeValue, toLabel(optionValue))}
               labels={dummyLabels}
             />
           </Item>

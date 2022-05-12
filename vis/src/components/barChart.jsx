@@ -18,8 +18,8 @@ function BarChart({ width, height, data, labels }){
     }, [data]);
 
     const draw = () => {
-        let margin = {top: 0, right: 90, bottom: 90, left: 50};
-        let svgWidth = 400, svgHeight = 680;
+        let margin = {top: 80, right: 90, bottom: 90, left: 50};
+        let svgWidth = 450, svgHeight = 800;
         let height = svgHeight- margin.top- margin.bottom, width = svgWidth - margin.left - margin.right;
         let sourceNames = [], sourceCount = [];
         
@@ -103,7 +103,7 @@ function BarChart({ width, height, data, labels }){
 
     return (
         <div className="Chart" style={{marginRight: "70px"}}>
-            <div className='ChartTitle' style={{marginBottom: "30px", marginTop: "10px"}}>
+            <div className='ChartTitle' style={{marginBottom: "10px", marginTop: "80px"}}>
                 {labels.title}
             </div>
             <svg ref={ref}>

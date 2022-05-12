@@ -22,8 +22,8 @@ export function PCP({data}) {
   const [state, setState] = useState();
   const [dimensions, setDimensions] = useState();
   var margin = { top: 50, right: 50, bottom: 50, left: 50 };
-  var width = 400 - margin.left - margin.right;
-  var height = 350 - margin.top - margin.bottom;
+  var width = 500 - margin.left - margin.right;
+  var height = 450 - margin.top - margin.bottom;
   var dragging = {};
   var line = d3.line();
   var background_lines, foreground_lines;

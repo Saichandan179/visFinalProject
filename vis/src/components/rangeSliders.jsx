@@ -21,7 +21,7 @@ const marks = [
   },
   {
     value: 2004,
-    label: "",
+    label: "2004",
   },
   {
     value: 2005,
@@ -37,7 +37,7 @@ const marks = [
   },
   {
     value: 2008,
-    label: "",
+    label: "2008",
   },
   {
     value: 2009,
@@ -53,7 +53,7 @@ const marks = [
   },
   {
     value: 2012,
-    label: "",
+    label: "2012",
   },
   {
     value: 2013,
@@ -69,7 +69,7 @@ const marks = [
   },
   {
     value: 2016,
-    label: "",
+    label: "2016",
   },
   {
     value: 2017,
@@ -94,9 +94,9 @@ function valuetext(value) {
   }
 
 export default function RangeSlider() {
-  const [value, setValue] = React.useState([2000, 2020]);
+  const [rangeValue, setRangeValue] = React.useState([2000, 2020]);
 
-  const handleChange = (event, newValue) => {
+  const handleRangeChange = (event, newValue) => {
     setValue(newValue);
   };
 

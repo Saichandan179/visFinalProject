@@ -23,9 +23,9 @@ function RadarChartWrap({ data, width, height }) {
   }, [data]);
 
   const draw = () => {
-    var margin = { top: 40, right: 80, bottom: 80, left: 80 },
+    var margin = { top: 75, right: 80, bottom: 80, left: 80 },
       width =
-        Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
+        Math.min(490, window.innerWidth - 10) - margin.left - margin.right,
       height = Math.min(
         width,
         window.innerHeight - margin.top - margin.bottom - 20

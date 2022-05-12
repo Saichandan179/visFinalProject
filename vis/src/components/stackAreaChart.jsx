@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import React, { useRef, useEffect } from "react";
+import {displayText} from '../functionutils';
 // import {dummyStackedAreaData} from "../dummydata";
 
 function StackedAreaChart({ width, height, data, range, countries }) {
@@ -19,9 +20,9 @@ function StackedAreaChart({ width, height, data, range, countries }) {
   }, [data]);
 
   const draw = () => {
-    var margin = { top: 30, right: 30, bottom: 90, left: 30 },
-      width = 400 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+    var margin = { top: 50, right: 80, bottom: 100, left: 20 },
+      width = 500 - margin.left - margin.right,
+      height = 480 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var svg = d3
@@ -30,7 +31,7 @@ function StackedAreaChart({ width, height, data, range, countries }) {
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate(" + 50 + "," + 50+ ")");
 
     var x = d3
       .scaleLinear()
@@ -45,11 +46,11 @@ function StackedAreaChart({ width, height, data, range, countries }) {
     var y = d3
       .scaleLinear()
       .domain([
-        1000000000,
-        2500000000
+        0,
+        1.5*Math.max(...data.map(arr => Math.max(...arr.map(o=>o.value1))))
       ])
       .range([height, 0]);
-    svg.append("g").call(d3.axisLeft(y));
+    svg.append("g").call(d3.axisLeft(y).tickFormat((d,i) => displayText(d)));
 
     const color = ["#5adfe8", "#64a5f5", "#6df7e3"]
 
