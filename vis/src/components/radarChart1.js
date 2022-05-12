@@ -186,7 +186,7 @@ function RadarChart(id, data, options) {
 			console.log(d);
 			tooltip
 				.html(d[0].country)
-				.style("left", (d3.event.pageX+10) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+				.style("left", (d3.event.pageX+10) + "px")
 				.style("top", (d3.event.pageY-10) + "px")
 				.transition().duration(1)
 				.style('opacity', 1);

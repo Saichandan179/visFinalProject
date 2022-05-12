@@ -94,18 +94,25 @@ function StackedAreaChart({ width, height, data, range, countries, labels }) {
     .enter()
     .append("path")
       .style("fill", function(d, i) { return getCountryColor(d[0].country); })
+      .style("fill-opacity", 1)
       .on('mouseover', function (d,i){
         console.log("mouse over called");
         console.log(d3.event.pageX+" "+d3.event.pageY);
         console.log(d);
+        d3.select(this)
+				.transition().duration(1)
+				.style("fill-opacity", 0.8);
         tooltip
           .html(d[0].country)
-          .style("left", (d3.event.pageX+10) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+          .style("left", (d3.event.pageX+10) + "px")
           .style("top", (d3.event.pageY-10) + "px")
           .transition().duration(1)
           .style('opacity', 1);	
       })
       .on('mouseout', function(){
+        d3.select(this)
+				.transition().duration(1)
+				.style("fill-opacity", 1);
         tooltip.transition().duration(200)
           .style("opacity", 0);
       })
