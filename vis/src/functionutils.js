@@ -189,14 +189,17 @@ export const getRadarChartData = (countries, range) => {
       {
         axis: "Military Expenditure",
         value: parseFloat(militaryExpData[range[1]][countries[i]]) / maxMil,
+        country: countries[i]
       },
       {
         axis: "Population",
         value: parseFloat(populationData[range[1]][countries[i]]) / maxPop,
+        country: countries[i]
       },
       {
         axis: "GDP",
         value: parseFloat(gdpData[range[1]][countries[i]]) / maxGDP,
+        country: countries[i]
       },
     ];
 
