@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import Grid from "@mui/material/Grid";
-import {displayText} from '../functionutils';
-import { colorsData } from "../dummydata";
+import {displayText, getCountryColor} from '../functionutils';
 import "./styles.css";
 
 const colors = [
@@ -189,7 +188,7 @@ export function PCP({data}) {
           .attr("d", path)
           .style("stroke", function(d) {
             // console.log("logging PCP colors", colorsData[d.country]);
-            return colorsData[d.country];
+            return getCountryColor(d.country);
           });
 
         var g = svg

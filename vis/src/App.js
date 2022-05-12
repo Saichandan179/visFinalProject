@@ -19,7 +19,7 @@ import {
   marks,
   optionmarks,
   valuetext,
-  toLabel
+  toLabel,
 } from "./functionutils";
 import { PCP } from "./components/PCP";
 
@@ -39,7 +39,7 @@ function App() {
 
   const [countries, setCountries] = useState([]);
   const [rangeValue, setRangeValue] = React.useState([2000, 2020]);
-  const [optionValue, setoptionValue] = React.useState("gdp");
+  const [optionValue, setoptionValue] = React.useState(3);
 
   const handleOptionChange = (event, newoptionValue) => {
     setoptionValue(newoptionValue);
@@ -79,27 +79,31 @@ function App() {
               </Item>
             </Grid>
             <Grid item xs={2} style={{ padding: "60px 0 60px 0" }}>
-            <Slider
-        getAriaLabel={() => "Years range"}
-        value={optionValue}
-        onChange={handleOptionChange}
-        getAriaValueText={valuetext}
-        orientation="vertical"
-        marks={optionmarks}
-        track={false}
-        min={1}
-        max={3}
-      />
+              <Slider
+                getAriaLabel={() => "Years range"}
+                value={optionValue}
+                onChange={handleOptionChange}
+                getAriaValueText={valuetext}
+                orientation="vertical"
+                marks={optionmarks}
+                track={false}
+                min={1}
+                max={3}
+              />
             </Grid>
             <Grid item xs={5} style={{ paddingTop: "0px" }}>
               <Item>
                 <StackedAreaChart
                   width={500}
                   height={500}
-                  data={getStackedAreaData(countries, rangeValue, toLabel(optionValue))}
+                  data={getStackedAreaData(
+                    countries,
+                    rangeValue,
+                    toLabel(optionValue)
+                  )}
                   range={rangeValue}
                   countries={countries}
-                  labels={{yLabel: `${toLabel(optionValue)}`, xLabel: 'year'}}
+                  labels={{ yLabel: `${toLabel(optionValue)}`, xLabel: "year" }}
                 />
               </Item>
             </Grid>
@@ -133,7 +137,11 @@ function App() {
             <BarChart
               width={400}
               height={800}
-              data={getBarChartData(countries, rangeValue, toLabel(optionValue))}
+              data={getBarChartData(
+                countries,
+                rangeValue,
+                toLabel(optionValue)
+              )}
               labels={{
                 title: `Country vs ${toLabel(optionValue)}`,
                 xLabel: toLabel(optionValue),

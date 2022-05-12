@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import React, { useRef, useEffect } from "react";
-import { displayText } from "../functionutils";
+import { displayText , getCountryColor} from "../functionutils";
 import { colorsData } from "../dummydata";
 // import {dummyStackedAreaData} from "../dummydata";
 
@@ -64,6 +64,16 @@ function StackedAreaChart({ width, height, data, range, countries, labels }) {
     .attr("y", height + 40)
     .text(`${labels.xLabel}`);
 
+    svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("font-size", "13px")
+    .attr("y", -50)
+    .attr("x", -height/2)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text(`${labels.yLabel}`);
+
     var tooltip = d3.select("#stackChart")
       .append("div")
       .style("opacity", 0)
@@ -83,7 +93,7 @@ function StackedAreaChart({ width, height, data, range, countries, labels }) {
     .data(data)
     .enter()
     .append("path")
-      .style("fill", function(d, i) { return colorsData[d[0].country]; })
+      .style("fill", function(d, i) { return getCountryColor(d[0].country); })
       .on('mouseover', function (d,i){
         console.log("mouse over called");
         console.log(d3.event.pageX+" "+d3.event.pageY);
