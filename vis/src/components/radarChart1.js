@@ -155,7 +155,7 @@ function RadarChart(id, data, options) {
 	// 	.style("opacity", 1);
 	var tooltip = d3.select("#radChart")
 		.append("div")
-		.style("opacity", 1)
+		.style("opacity", 0)
 		.attr("class", "tooltip")
 		.style("position", "absolute")
 		.style("background-color", "black")
@@ -178,7 +178,6 @@ function RadarChart(id, data, options) {
 				.transition().duration(200)
 				.style("fill-opacity", 0.1); 
 			//Bring back the hovered over blob
-			// TODO Tool tip for this
 			var newX =  parseFloat(d3.select(this).attr('cx')) - 10;
 			var newY =  parseFloat(d3.select(this).attr('cy')) - 10;
 			console.log("mouse over called");

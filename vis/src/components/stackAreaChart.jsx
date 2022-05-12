@@ -54,6 +54,18 @@ function StackedAreaChart({ width, height, data, range, countries }) {
 
     const color = ["#5adfe8", "#64a5f5", "#6df7e3"]
 
+    var tooltip = d3.select("#stackChart")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("position", "absolute")
+      .style("background-color", "black")
+      .style("border", "solid")
+      .style("border-width", "0px")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      .style("visibility", "visible");
+
     // var color = ['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf'];
 
     svg
@@ -62,6 +74,21 @@ function StackedAreaChart({ width, height, data, range, countries }) {
     .enter()
     .append("path")
       .style("fill", function(d, i) { return color[i] })
+      .on('mouseover', function (d,i){
+        console.log("mouse over called");
+        console.log(d3.event.pageX+" "+d3.event.pageY);
+        console.log(d);
+        tooltip
+          .html(d[0].country)
+          .style("left", (d3.event.pageX+10) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+          .style("top", (d3.event.pageY-10) + "px")
+          .transition().duration(1)
+          .style('opacity', 1);	
+      })
+      .on('mouseout', function(){
+        tooltip.transition().duration(200)
+          .style("opacity", 0);
+      })
       .attr("d", d3.area()
         .x(function(d, i) { return x(d.year); })
         .y0(function(d) { return y(d.value0); })
@@ -71,7 +98,7 @@ function StackedAreaChart({ width, height, data, range, countries }) {
   };
 
   return (
-    <div className="Chart" >
+    <div id="stackChart" className="Chart" >
       <svg ref={ref}></svg>
     </div>
   );
