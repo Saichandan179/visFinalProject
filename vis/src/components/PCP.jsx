@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import Grid from "@mui/material/Grid";
+import {displayText} from '../functionutils';
 import "./styles.css";
 
 const colors = [
@@ -48,8 +49,7 @@ export function PCP({data}) {
               }
               dimensionz.push(tempObj);
             }
-          });
-          
+          });  
     }
     setDimensions(dimensionz);
           tempDims = dimensionz;
@@ -240,7 +240,7 @@ export function PCP({data}) {
         g.append("g")
           .attr("class", "axis")
           .each(function(d) {
-            d3.select(this).call(d3.axisLeft().scale(d.scale));
+            d3.select(this).call(d3.axisLeft().scale(d.scale).tickFormat((d,i) => parseInt(d) != NaN ? displayText(d) : d));
           })
           .append("text")
           .style("text-anchor", "middle")

@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import React, { useRef, useEffect } from 'react';
+import {displayText} from '../functionutils';
 
 function BarChart({ width, height, data, labels }){
     const ref = useRef();
@@ -42,7 +43,7 @@ function BarChart({ width, height, data, labels }){
         
         svg.append("g")
             .attr("transform", "translate(0, " + height + ")")
-            .call(d3.axisBottom(x))
+            .call(d3.axisBottom(x).tickFormat((d,i) => displayText(d)))
             .selectAll("text")  
             .style("text-anchor", "end")
             .attr("dx", "-.8em")
@@ -86,7 +87,7 @@ function BarChart({ width, height, data, labels }){
             
         bars.append("text")
             .text(function(d) { 
-                return `${parseInt(data[d]/1000000000)}B`;
+                return displayText(data[d]);
             })
             .attr("x", function(d){
                 return x(data[d]) + 20;

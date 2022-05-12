@@ -45,7 +45,7 @@ export const getPCPdata = (countries, range) => {
                 country: countries[i],
                 color: i,
                 population: populationData[j][countries[i]],
-                gdp: gdpData[j][countries[i]],
+                gdp: parseFloat(gdpData[j][countries[i]]),
                 "Military Expenditure": militaryExpData[j][countries[i]]
             }
 
@@ -54,4 +54,56 @@ export const getPCPdata = (countries, range) => {
     }
 
     return data;
+}
+
+export const getRadarChartData = (countries, range) => {
+    let data = [];
+    let maxGDP = 0, maxMil = 0, maxPop = 0;
+    for(var i = 0; i < countries.length; i++){
+        maxGDP = Math.max(maxGDP, parseFloat(gdpData[range[1]][countries[i]]));
+        maxMil = Math.max(maxMil, militaryExpData[range[1]][countries[i]]);
+        maxPop = Math.max(maxPop, populationData[range[1]][countries[i]]);
+        console.log("logging values", maxGDP, maxMil, maxPop);
+        
+    }
+
+    for(var i = 0; i < countries.length; i++){
+        let objarr = [
+            { axis: "Military Expenditure", value: parseFloat(militaryExpData[range[1]][countries[i]])/maxMil },
+            { axis: "Population", value: parseFloat(populationData[range[1]][countries[i]])/maxPop },
+            { axis: "GDP", value: parseFloat(gdpData[range[1]][countries[i]])/maxGDP }
+        ];
+        
+        data.push(objarr);
+    }
+
+    return data;
+
+}
+
+export const getBarChartData = (countries, range, plot) => {
+    let data, datatoreturn = {};
+    if(plot === 'population'){
+        data = populationData;
+    } else if(plot === 'gdp'){
+        data = gdpData;
+    } else {
+        data = militaryExpData;
+    }
+
+    for(var i = 0; i < countries.length; i++){
+        datatoreturn[countries[i]] = data[range[1]][countries[i]];
+    }
+    // console.log("returning data", datatoreturn);
+    return datatoreturn;
+}
+
+export const displayText = (val) => {
+    if(val > 1000000000000){
+        return `${parseInt(val/100000000000)/10}T`;
+    } else if(val > 1000000000){
+        return `${parseInt(val/100000000)/10}B`;
+    } else if(val > 1000000){
+        return `${parseInt(val/100000)/10}M`;
+    }  else return `${val}`;
 }

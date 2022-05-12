@@ -17,7 +17,7 @@ import {
   pcptempdata
 } from "./dummydata";
 import StackedAreaChart from "./components/stackAreaChart";
-import {getStackedAreaData, getPCPdata} from './functionutils';
+import {getStackedAreaData, getPCPdata, getRadarChartData, getBarChartData} from './functionutils';
 import { PCP } from './components/PCP';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -61,7 +61,7 @@ function App() {
             <Grid item xs={6}>
               <Item><PCP data={getPCPdata(countries, [2000, 2006])}/></Item>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} style={{paddingTop: '0px'}}>
               <Item>
                 <StackedAreaChart
                   width={400}
@@ -72,9 +72,11 @@ function App() {
                 />
               </Item>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} style={{paddingTop: '0px'}}>
               <Item>
-                <RadarChartWrap width={400} height={400} />
+                {
+                  countries.length > 0 && (<RadarChartWrap data={getRadarChartData(countries, [2000, 2003])} width={400} height={400} />)
+                }
               </Item>
             </Grid>
           </Grid>
@@ -98,7 +100,7 @@ function App() {
             <BarChart
               width={400}
               height={800}
-              data={dummyBarChartData}
+              data={getBarChartData(countries, [2000, 2008], "population")}
               labels={dummyLabels}
             />
           </Item>
