@@ -22,7 +22,7 @@ const rounded = num => {
 const MapChart = ({ selectCountry, setTooltipContent }) => {
   return (
     <>
-      <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
+      <ComposableMap data-tip="" projectionConfig={{ scale: 180 }}>
         <ZoomableGroup>
           <Geographies geography={geoUrl}>
             {({ geographies }) =>

@@ -61,7 +61,14 @@ function BarChart({ width, height, data, labels }) {
       .attr("dx", "-.8em")
       .attr("dy", ".15em")
       .attr("transform", "rotate(-60)");
-    svg.append("g").call(d3.axisLeft(y));
+
+    svg.append("g").call(d3.axisLeft(y))
+    .selectAll("text")
+    .attr("y", 20)
+    .attr("x", -30)
+    .attr("dy", ".35em")
+    .attr("transform", "rotate(90)")
+    .style("text-anchor", "start");;
 
     // svg.append("text")
     //     .attr("text-anchor", "end")
